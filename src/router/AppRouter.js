@@ -1,28 +1,28 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import Header from '../components/Header';
-import AddBook from '../components/AddBook';
-import BooksList from '../components/BooksList';
+import AddOrganization from '../components/AddOrganization';
+import OrganizationsList from '../components/OrganizationsList';
 import useLocalStorage from '../hooks/useLocalStorage';
-import EditBook from '../components/EditBook';
-import BooksContext from '../context/BooksContext';
+import EditOrganization from '../components/EditOrganization';
+import OrganizationsContext from '../context/OrganizationsContext';
 
 const AppRouter = () => {
-  const [books, setBooks] = useLocalStorage('books', []);
+  const [organizations, setOrganizations] = useLocalStorage('organizations', []);
 
   return (
     <BrowserRouter>
       <div>
         <Header />
         <div className="main-content">
-          <BooksContext.Provider value={{ books, setBooks }}>
+          <OrganizationsContext.Provider value={{ organizations, setOrganizations }}>
             <Switch>
-              <Route component={BooksList} path="/" exact={true} />
-              <Route component={AddBook} path="/add" />
-              <Route component={EditBook} path="/edit/:id" />
+              <Route component={OrganizationsList} path="/" exact={true} />
+              <Route component={AddOrganization} path="/add" />
+              <Route component={EditOrganization} path="/edit/:id" />
               <Route component={() => <Redirect to="/" />} />
             </Switch>
-          </BooksContext.Provider>
+          </OrganizationsContext.Provider>
         </div>
       </div>
     </BrowserRouter>
